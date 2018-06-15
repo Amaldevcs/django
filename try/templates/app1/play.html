@@ -1,0 +1,35 @@
+ {% extends 'base.html' %}
+ {% load crispy_forms_tags %}
+ {% block jimbo %}
+ {% if not request.user.is_authenticated %}
+
+ <div class ='row'>
+  <div class ='col-sm-6'>
+      <div class="jumbotron">
+        <h1>HI! THERE EXAMPLE</h1>
+        <p class="lead">This example is a quick exercise to illustrate how the top-aligned navbar works. As you scroll, this navbar remains in its original position and moves with the rest of the page.</p>
+        <a class="btn btn-lg btn-primary" href="" role="button">JOin us &raquo;</a>
+      </div>
+   </div>
+   <div  class ='col-sm-6' style="background-color:black;height:300px; ">
+    </div>
+ </div>
+ {% else %}
+ {{querry}}
+{% endif %}
+     
+{% endblock %}
+ 
+{% block content %}
+
+{% if request.user.is_authenticated %}
+<h1>YOU ARE NOW LOGED IN!</h1>
+{% else %}
+      <h1> {{title}} </h1>
+<form method ='POST' action=''>{% csrf_token %}
+{{form|crispy}}
+<input type="submit" value="signup"/>
+</form>
+{% endif %}
+{% endblock %}
+
