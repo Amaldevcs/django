@@ -7,7 +7,10 @@ urlpatterns = [
                 url(r'^$',views.play,name='play'),
                 url(r'^contact/$',views.contact,name='contact'),
                 url(r'^about/$',views.about,name='about'),
-              # url(r'^accounts/',include('registration.backends.default.urls')),
+                url(r'^marksheet/$',views.marks,name='marksheet'),
+               #url(r'^accounts/',include('registration.backends.default.urls'
+               url(r'^add/$',views.add,name='add'),
+                url(r'^delete/(?P<pk>\d+)/$',views.deletes,name='deletes'),
                
 
                 ]

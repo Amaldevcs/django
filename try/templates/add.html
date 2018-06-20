@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+CAN GOTO MARKSHEET BY CLICKING <a href="/marksheet">HERE</a></br>
+<h1>{{title}}</h1>
+
+<form method ='POST' action=''>{% csrf_token %}
+{{form|crispy}}
+<input type="submit" value="ADD"/>
+</form>
+{% endblock %}

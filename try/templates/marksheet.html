@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% if not request.user.is_authenticated %}
+<table class = table>
+<tr><td>SL.NO</td><td>NAME</td><td>MARK</td></tr>
+{% for instance in querry %}
+<tr><td>{{forloop.counter}}</td><td>{{instance}}{{instance.id}}</td><td>{{instance.mark}}</td></tr>
+{% endfor %}
+</table>
+{% else %}
+ <a class="btn btn-lg btn-primary" href="/add" role="button">ADD &raquo;</a>
+ <table class = table>
+<tr><td>SL.NO</td><td>NAME</td><td>MARK</td></tr>
+{% for instance in querry %}
+<tr><td>{{forloop.counter}}</td><td>{{instance}}</td><td>{{instance.mark}}</td><td><a class="btn btn-lg btn-primary" href="{% url 'deletes' pk=instance.id %}" role="button">DELETE &raquo;</a></tr>
+{% endfor %}
+</table>
+{{title}}
+ {% endif %}
+{% endblock %}

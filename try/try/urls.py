@@ -7,7 +7,7 @@ urlpatterns = [
                
                url(r'^admin/', admin.site.urls),
                url(r'',include ('app1.url')),
-                url(r'^accounts/',include('registration.backends.default.urls')),
+                url(r'^accounts/', include('registration.backends.simple.urls')),
                #url(r'^contact/',include ('app1.url')),
  ]
 #if settings.DEBUG:

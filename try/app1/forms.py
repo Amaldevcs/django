@@ -1,5 +1,5 @@
 from django import forms
-from .models import signup
+from .models import signup,marksheet
 class contactform(forms.Form):
 	fullname = forms.CharField()
 	email = forms.EmailField()
@@ -19,8 +19,8 @@ class signupform(forms.ModelForm):
     	    if not exten == 'com':
 
     		    raise forms.ValidationError("please enter valid email with .com extention")
-    	    return email	 
-
-
-
-
+    	    return email
+class marksheetform(forms.ModelForm):
+    class Meta:
+        model = marksheet
+        fields = ["fullname","mark"]

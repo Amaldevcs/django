@@ -31,13 +31,13 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'django.contrib.admin',
     'registration',
     'crispy_forms',
      'app1',
@@ -132,3 +132,6 @@ ACCOUNT_ACTIVATION_DAYS = 7
 REGISTRATION_AUTO_LOGIN = True
 SITE_ID = 1
 LOGIN_REDIRECT_URL = "/"
+#REGISTRATION_EMAIL_HTML=False
+#if DEBUG:
+    EMAIL_BACKEND='django.core.mail.backends.dummy.EmailBackend'
