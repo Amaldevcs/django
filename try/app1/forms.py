@@ -1,5 +1,5 @@
 from django import forms
-from .models import signup,marksheet
+from .models import signup,marksheet,twitter
 class contactform(forms.Form):
 	fullname = forms.CharField()
 	email = forms.EmailField()
@@ -24,3 +24,8 @@ class marksheetform(forms.ModelForm):
     class Meta:
         model = marksheet
         fields = ["fullname","mark"]
+
+class twitterform(forms.ModelForm):
+    class Meta:
+        model = twitter
+        fields = ["fullname"]

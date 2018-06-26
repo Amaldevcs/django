@@ -11,7 +11,7 @@ urlpatterns = [
                #url(r'^accounts/',include('registration.backends.default.urls'
                url(r'^add/$',views.add,name='add'),
                 url(r'^delete/(?P<pk>\d+)/$',views.deletes,name='deletes'),
-               
+               url(r'^tweets/$',views.tweets,name='tweets'),
 
                 ]
 if settings.DEBUG:

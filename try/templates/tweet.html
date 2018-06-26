@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h1>{{title}}</h1>
+{% for i in a %}
+<li>
+{{i}}
+</li>
+{% endfor %}
+
+<form method ='POST' action=''>{% csrf_token %}
+{{form|crispy}}
+<input type="submit" value="GET"/>
+</form>
+{% endblock %}

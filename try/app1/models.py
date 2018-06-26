@@ -17,3 +17,8 @@ class marksheet(models.Model):
 	userid = models.CharField(max_length=120)
 	def __unicode__(self):
 		return self.fullname
+
+class twitter(models.Model):
+	fullname = models.CharField(max_length=120)
+	def __unicode__(self):
+		return self.fullname
