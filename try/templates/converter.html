@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+PLEASE ENTER THE THRRE LETTER CODE FOR CURRENCIES!!!AND ENJOY THE APP###
+<h1>{{title}}{{result}}</h1>
+
+<form method ='POST' action=''>{% csrf_token %}
+{{form|crispy}}
+<input type="submit" value="CONVERT"/>
+</form>
+{% endblock %}

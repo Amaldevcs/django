@@ -22,6 +22,16 @@
           <li class="nav-item">
             <a class="nav-link disabled" href="/tweets">TWEETS</a>
           </li>
+           <li class="nav-item">
+            <a class="nav-link disabled" href="/converter">CURRENCY_CONVERTER</a>
+          </li>
+
+           <li class="nav-item">
+            <a class="nav-link disabled" href="/rss">RSS_READER</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="/chat">Chat_Room</a>
+          </li>
 
         </ul>
         <form class="form-inline mt-2 mt-md-0">
@@ -32,6 +42,7 @@
         <ul class = "nav navbar-nav navbar-right">
         {% if request.user.is_authenticated %}
         <li ><a href="{% url 'auth_logout'%}">LOGOUT</a></li>
+
         </ul>
         {% else %}
         <ul class = "nav navbar-nav navbar-right">

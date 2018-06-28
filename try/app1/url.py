@@ -12,6 +12,10 @@ urlpatterns = [
                url(r'^add/$',views.add,name='add'),
                 url(r'^delete/(?P<pk>\d+)/$',views.deletes,name='deletes'),
                url(r'^tweets/$',views.tweets,name='tweets'),
+               url(r'^converter/$',views.converter,name='converter'),
+               url(r'^rss/$',views.rsss,name='rss'),
+               url(r'^chat/$',views.chat,name='chat'),
+
 
                 ]
 if settings.DEBUG:

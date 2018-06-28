@@ -4,8 +4,9 @@ import requests,json
 from requests_oauthlib import OAuth1
 from django.contrib.auth.models import User
 from django.shortcuts import render
-from .forms import contactform,signupform,marksheetform,twitterform
-from .models import signup,marksheet,twitter
+from .forms import contactform,signupform,marksheetform,twitterform,currencyform,rssform,chatform
+from .models import signup,marksheet,twitter,currency,rss,chat
+import feedparser
 # Create your views here.
 def play(request):
 	title = 'SignUp'
@@ -52,6 +53,7 @@ def add(request):
 		if instance.fullname:
 		    instance.userid=request.user.id
 		    print instance.fullname
+		    print instance.userid
 		    instance.save() 
 		    context = {
 		"title":"MARK ADDED"
@@ -119,3 +121,78 @@ def tweets(request):
 		}
 
 	return render(request,"tweet.html",context)
+def converter(request):
+	form = currencyform(request.POST or None)
+	title = ""
+	context={
+	"form":form,
+	"title":title
+	}
+	if form.is_valid():
+		instance =form.save(commit=False)
+
+		if instance.fro and instance.to:
+			api_key = "a9da6bd7112437cbe655914c40024b97"
+			url = "http://data.fixer.io/api/latest?access_key="+api_key
+			r = requests.get(url)
+			d = r.json()
+			c= d["rates"]
+			base = "EUR"
+			if instance.fro==base:
+				result =  float(c[instance.to])*float(instance.amount)
+			else:
+				x = float(1/c[instance.fro])
+				y =  float(x*float(instance.amount))
+				result = y*c[instance.to]
+			instance.save() 
+			context = {
+		"result":result,
+		"title":"CONVEETED AMOUNT IS :"
+		}
+
+	return render(request,"converter.html",context)
+def rsss(request):
+	form = rssform(request.POST or None)
+	title = ""
+	context={
+	"form":form,
+	"title":title
+	}
+	if form.is_valid():
+		instance =form.save(commit=False)
+		if instance.url:
+			urls = instance.url
+			r = feedparser.parse(urls)
+			a = []
+			for i in r["entries"]:
+				a.append("*******"+i["title"]+"*********"+"\n"+i["published"]+"\::-->"+i["summary"]+":"+i["link"])
+			instance.save() 
+			context = {
+		"title":"MARK ADDED",
+		"a":a
+		}
+
+	return render(request,"rsss.html",context)
+def chat(request):
+	form = chatform(request.POST or None)
+	title = "ENTER THE MESSAGE HERE"
+	context={
+	"form":form,
+	"title":title
+	}
+	if form.is_valid():
+		instance =form.save(commit=False)
+		if instance.msg:
+			msgs = instance.msg
+			url = "https://matrix.org/_matrix/client/r0/rooms/!FXclHICUyrLMhiVPYq:matrix.org/send/m.room.message?access_token=MDAxOGxvY2F0aW9uIG1hdHJpeC5vcmcKMDAxM2lkZW50aWZpZXIga2V5CjAwMTBjaWQgZ2VuID0gMQowMDI4Y2lkIHVzZXJfaWQgPSBAYW1hbGRldmNzOm1hdHJpeC5vcmcKMDAxNmNpZCB0eXBlID0gYWNjZXNzCjAwMjFjaWQgbm9uY2UgPSBRU2MsYU9vMn5LWEw9MnQ3CjAwMmZzaWduYXR1cmUgnufaSzM_y5gwiYnRnuqt2OpTIPaywRDJjJ37rbGJ0zQK"
+			content = {"msgtype":"m.text","body":msgs}
+			data = json.dumps(content)
+			r = requests.post(url,data=data)
+			if r.status_code == 200:
+				instance.save() 
+				context = {
+		"title":"Successfully sent!!!!",
+		
+		}
+
+	return render(request,"chat.html",context)
