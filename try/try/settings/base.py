@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'registration',
     'crispy_forms',
-     'app1',
+     'app2',
 ]
 
 MIDDLEWARE = [

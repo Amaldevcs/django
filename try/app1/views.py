@@ -62,6 +62,8 @@ def add(request):
 	return render(request,"add.html",context)
 def marks(request):
 	querry = marksheet.objects.all()
+	for i in querry:
+		print i.mark
 	context={
 	"querry":querry,
 	}

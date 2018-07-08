@@ -3,17 +3,18 @@
 {% block content %}
 {% if not request.user.is_authenticated %}
 <table class = table>
-<tr><td>SL.NO</td><td>NAME</td><td>MARK</td></tr>
+<tr><td>SL.NO</td><td>NAME</td><td>POSITION</td><td>SALARY</td><td>ID</td></tr>
 {% for instance in querry %}
-<tr><td>{{forloop.counter}}</td><td>{{instance}}{{instance.id}}</td><td>{{instance.mark}}</td></tr>
+<tr><td>{{forloop.counter}}</td><td>{{instance}}</td><td>{{instance.position}}</td><td>{{instance.salary}}</td><td>{{instance.userid}}</td><td><a class="btn btn-lg btn-primary" href="/apply" role="button">APPLY &raquo;</a></td></tr>
 {% endfor %}
 </table>
 {% else %}
+TO ADD YOUR COMPANY AND ITS DETATIL CLICK ON ADD
  <a class="btn btn-lg btn-primary" href="/add" role="button">ADD &raquo;</a>
  <table class = table>
-<tr><td>SL.NO</td><td>NAME</td><td>MARK</td></tr>
+<tr><td>SL.NO</td><td>NAME</td><td>POSITION</td><td>SALARY</td><td>ID</td></tr>
 {% for instance in querry %}
-<tr><td>{{forloop.counter}}</td><td>{{instance}}</td><td>{{instance.mark}}</td><td><a class="btn btn-lg btn-primary" href="{% url 'deletes' pk=instance.id %}" role="button">DELETE &raquo;</a></tr>
+<tr><td>{{forloop.counter}}</td><td>{{instance}}</td><td>{{instance.position}}</td><td>{{instance.salary}}</td><td>{{instance.userid}}</td><td><a class="btn btn-lg btn-primary" href="{% url 'deletes' pk=instance.id %}" role="button">DELETE &raquo;</a></td><td><a class="btn btn-lg btn-primary" href="/applicant" role="button">APPLICANTS&raquo;</a></td></tr>
 {% endfor %}
 </table>
 {{title}}

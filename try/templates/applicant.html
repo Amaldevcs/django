@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<table class = table>
+<tr><td>SL.NO</td><td>EMAIL</td><td>NAME</td></tr>
+{% for instance in querry %}
+<tr><td>{{forloop.counter}}</td><td>{{instance}}</td><td>{{instance.fullname}}</td></tr>
+{% endfor %}
+</table>
+
+{% endblock %}

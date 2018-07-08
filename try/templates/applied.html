@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block jimbo %}
+YOU  CAN SEE JOB_MENU BY CLICKING <a href="/job">HERE</a>
+</table>
+ <h1> {{title}} </h1>
+<form method ='POST' action=''>{% csrf_token %}
+{{form|crispy}}
+<input type="submit" value="GET"/>
+</form>
+<table class = table>
+<tr><td>NAME</td><td>POSITION</td></tr>
+{% for instance in querry %}
+{% for instance1 in instance %}
+<tr><td>{{instance1}}</td><td>{{instance1.position}}</td></tr>
+{% endfor %}
+{% endfor %}
+</table>
+
+{% endblock %}
